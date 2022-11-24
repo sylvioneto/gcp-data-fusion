@@ -81,7 +81,7 @@ resource "google_compute_firewall" "allow_df_private" {
 resource "google_compute_network_peering" "datafusion" {
   name                 = "datafusion-peering"
   network              = module.vpc.network_name
-  peer_network         = google_compute_network.datafusion_network.id
+  peer_network         = data.google_compute_network.datafusion_network.id
   export_custom_routes = true
   import_custom_routes = true
 }
