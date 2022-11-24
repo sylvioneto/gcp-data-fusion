@@ -65,13 +65,13 @@ resource "google_compute_router_nat" "nat_gateway" {
 
 ## Firewall ## 
 resource "google_compute_firewall" "allow_df_private" {
-  name    = "allow-df-private"
+  name    = "allow-private-data-fusion"
   network = module.vpc.network_name
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8080", "1000-2000"]
+    ports    = ["22", "3306", "5432", "1433"]
   }
-
+  
   source_ranges = [ var.datafusion_cidr ]
 }
