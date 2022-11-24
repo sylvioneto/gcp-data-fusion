@@ -16,8 +16,18 @@ resource "google_data_fusion_instance" "df_private" {
 
   version = "6.7.2"
 
-  # Mark for testing to avoid service networking connection usage that is not cleaned up
-  options = {
-    prober_test_run = "true"
-  }
+  #   # Mark for testing to avoid service networking connection usage that is not cleaned up
+  #   options = {
+  #     prober_test_run = "true"
+  #   }
+}
+
+
+## Peering ##
+resource "google_compute_network_peering" "datafusion" {
+  name                 = "datafusion-peering"
+  network              = module.vpc.network_id
+  peer_network         = "projects/${google_data_fusion_instance.df_private.tenant_project_id}/global/networks/${var.region}-${local.df_name}"
+  export_custom_routes = true
+  import_custom_routes = true
 }

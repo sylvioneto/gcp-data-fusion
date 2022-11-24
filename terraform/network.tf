@@ -59,6 +59,18 @@ resource "google_compute_router_nat" "nat_gateway" {
 }
 
 ## Firewall ## 
+resource "google_compute_firewall" "allow_ssh" {
+  name    = "allow-ssh-from-iap"
+  network = module.vpc.network_name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+  source_ranges = ["35.235.240.0/20"]
+  target_tags   = ["allow-ssh"]
+}
+
 resource "google_compute_firewall" "allow_df_private" {
   name    = "allow-private-data-fusion"
   network = module.vpc.network_name
@@ -69,15 +81,5 @@ resource "google_compute_firewall" "allow_df_private" {
   }
 
   source_ranges = [local.datafusion_cidr]
-}
-
-
-## Peering ##
-resource "google_compute_network_peering" "datafusion" {
-  name                 = "datafusion-peering"
-  network              = module.vpc.network_id
-  peer_network         = "projects/${google_data_fusion_instance.df_private.tenant_project_id}/global/networks/${var.region}-${local.df_name}"
-  export_custom_routes = true
-  import_custom_routes = true
 }
 

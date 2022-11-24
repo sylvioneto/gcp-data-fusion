@@ -9,7 +9,7 @@ locals {
   ]
 
   servicenetworking_cidr = "10.200.0.0" #/16
-  datafusion_cidr        = "10.201.0.0/22"
+  datafusion_cidr        = "10.124.40.0/22"
   df_name = "df-private"
 }
 
