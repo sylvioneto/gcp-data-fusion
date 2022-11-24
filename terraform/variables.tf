@@ -26,7 +26,7 @@ variable "region" {
 variable "network_name" {
   type        = string
   description = "VPC name"
-  default     = "composer-af2"
+  default     = "vpc-data-fusion"
 }
 
 variable "db_password" {
