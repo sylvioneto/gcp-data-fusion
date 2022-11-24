@@ -15,6 +15,7 @@ module "vpc" {
   ]
 }
 
+## Service Network ## 
 resource "google_compute_global_address" "service_range" {
   name          = "servicenetworking-address"
   purpose       = "VPC_PEERING"
@@ -28,6 +29,13 @@ resource "google_service_networking_connection" "private_service_connection" {
   network                 = module.vpc.network_id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
+}
+
+resource "google_compute_network_peering_routes_config" "private_service_connection" {
+  peering              = google_service_networking_connection.private_service_connection.peering
+  network              = module.vpc.network_name
+  import_custom_routes = false
+  export_custom_routes = true
 }
 
 ## Nat ## 
@@ -68,7 +76,7 @@ resource "google_compute_firewall" "allow_df_private" {
 resource "google_compute_network_peering" "datafusion" {
   name                 = "datafusion-peering"
   network              = module.vpc.network_id
-  peer_network         = data.google_compute_network.datafusion_network.id
+  peer_network         = "projects/${google_data_fusion_instance.df_private.tenant_project_id}/global/networks/${var.region}-${local.df_name}"
   export_custom_routes = true
   import_custom_routes = true
 }

@@ -14,7 +14,7 @@ resource "google_data_fusion_instance" "df_private" {
     ip_allocation = local.datafusion_cidr
   }
 
-  version = "6.3.0"
+  version = "6.7.2"
 
   # Mark for testing to avoid service networking connection usage that is not cleaned up
   options = {
