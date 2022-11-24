@@ -6,5 +6,5 @@ resource "google_service_account" "proxy_sa" {
 resource "google_project_iam_member" "sql_client" {
   project = var.project_id
   role    = "roles/sql.client"
-  member  = "serviceAccount:${google_service_account.service_account.email}"
+  member  = "serviceAccount:${google_service_account.proxy_sa.email}"
 }

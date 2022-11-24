@@ -11,7 +11,7 @@ resource "google_data_fusion_instance" "df_private" {
 
   network_config {
     network       = module.vpc.network_name
-    ip_allocation = var.datafusion_cidr
+    ip_allocation = local.datafusion_cidr
   }
 
   version = "6.3.0"

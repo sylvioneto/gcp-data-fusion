@@ -13,26 +13,13 @@ module "vpc" {
       subnet_private_access = true
     },
   ]
-
-  secondary_ranges = {
-    "${var.composer_env_name}" = [
-      {
-        range_name    = "pods"
-        ip_cidr_range = var.composer_ip_ranges.pods
-      },
-      {
-        range_name    = "services"
-        ip_cidr_range = var.composer_ip_ranges.services
-      },
-    ]
-  }
 }
 
 resource "google_compute_global_address" "service_range" {
   name          = "servicenetworking-address"
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
-  address       = var.servicenetworking_cidr
+  address       = local.servicenetworking_cidr
   prefix_length = 16
   network       = module.vpc.network_name
 }
@@ -43,7 +30,7 @@ resource "google_service_networking_connection" "private_service_connection" {
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
 }
 
-
+## Nat ## 
 resource "google_compute_router" "nat_router" {
   name    = "${module.vpc.network_name}-nat-router"
   network = module.vpc.network_self_link
@@ -73,14 +60,14 @@ resource "google_compute_firewall" "allow_df_private" {
     ports    = ["22", "3306", "5432", "1433"]
   }
 
-  source_ranges = [var.datafusion_cidr]
+  source_ranges = [local.datafusion_cidr]
 }
 
 
 ## Peering ##
 resource "google_compute_network_peering" "datafusion" {
   name                 = "datafusion-peering"
-  network              = module.vpc.network_name
+  network              = module.vpc.network_id
   peer_network         = data.google_compute_network.datafusion_network.id
   export_custom_routes = true
   import_custom_routes = true
