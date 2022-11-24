@@ -72,6 +72,17 @@ resource "google_compute_firewall" "allow_df_private" {
     protocol = "tcp"
     ports    = ["22", "3306", "5432", "1433"]
   }
-  
-  source_ranges = [ var.datafusion_cidr ]
+
+  source_ranges = [var.datafusion_cidr]
 }
+
+
+## Peering ##
+resource "google_compute_network_peering" "datafusion" {
+  name                 = "datafusion-peering"
+  network              = module.vpc.network_name
+  peer_network         = google_compute_network.datafusion_network.id
+  export_custom_routes = true
+  import_custom_routes = true
+}
+

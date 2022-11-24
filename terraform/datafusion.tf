@@ -1,5 +1,5 @@
 resource "google_data_fusion_instance" "df_private" {
-  name                          = "df-private"
+  name                          = local.df_name
   description                   = "My Data Fusion private instance"
   region                        = var.region
   type                          = "DEVELOPER"
