@@ -26,6 +26,6 @@ options:
 tags:
   - terraform
   - data-fusion
-  - plan-apply
+  - destroy
 
 timeout: 3600s
