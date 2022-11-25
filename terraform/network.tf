@@ -83,3 +83,18 @@ resource "google_compute_firewall" "allow_df_private" {
   source_ranges = [local.datafusion_cidr]
 }
 
+# This rule is not recommended for production
+resource "google_compute_firewall" "allow_all_internal" {
+  name    = "allow-all-internal"
+  network = module.vpc.network_name
+
+  allow {
+    protocol = "tcp"
+  }
+  
+  allow {
+    protocol = "icmp"
+  }  
+
+  source_ranges = ["10.0.0.0/8"]
+}

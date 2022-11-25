@@ -1,16 +1,8 @@
 locals {
-  // Datastream us-central1
-  datastream_ips = [
-    "34.72.28.29",
-    "34.67.234.134",
-    "34.67.6.157",
-    "34.72.239.218",
-    "34.71.242.81"
-  ]
-
-  servicenetworking_cidr = "10.200.0.0" #/16
-  datafusion_cidr        = "10.124.40.0/22"
-  df_name = "df-private"
+  servicenetworking_cidr = "10.200.0.0"  #/16
+  datafusion_cidr        = "10.124.40.0" #22
+  
+  df_instance_name       = "df-private"
 }
 
 variable "project_id" {
@@ -35,7 +27,6 @@ variable "db_password" {
   description = "Database default password"
   default     = "supersecret"
 }
-
 
 variable "resource_labels" {
   type        = map(string)

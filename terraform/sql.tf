@@ -14,16 +14,6 @@ resource "google_sql_database_instance" "instance" {
 
     ip_configuration {
       private_network = module.vpc.network_self_link
-
-      dynamic "authorized_networks" {
-        for_each = local.datastream_ips
-        iterator = datastream_ips
-
-        content {
-          name  = "datastream-${datastream_ips.key}"
-          value = datastream_ips.value
-        }
-      }
     }
   }
 
