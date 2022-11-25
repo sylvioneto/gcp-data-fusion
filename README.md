@@ -17,8 +17,7 @@ echo $GOOGLE_CLOUD_PROJECT
 
 3. Clone this repo
 ```
-git clone https://github.com/sylvioneto/gcp-data-fusion.git
-cd gcp-data-fusion
+git clone https://github.com/sylvioneto/gcp-data-fusion.git; cd gcp-data-fusion
 ```
 
 4. Run the `deploy.sh` script
