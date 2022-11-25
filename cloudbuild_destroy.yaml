@@ -10,17 +10,11 @@ steps:
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=data-fusion"
   dir: terraform
-      
-- id: 'tf plan'
-  name: 'hashicorp/terraform:1.0.0'
-  args: 
-  - plan
-  dir: terraform
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
-  - apply
+  - destroy
   - -auto-approve
   dir: terraform
 
