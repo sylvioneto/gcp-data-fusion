@@ -1,8 +1,9 @@
 locals {
   servicenetworking_cidr = "10.200.0.0"  #/16
-  datafusion_cidr        = "10.124.40.0" #22
-  
-  df_instance_name       = "df-private"
+  datafusion_cidr        = "10.124.40.0" #/22
+
+  df_instance_name  = "df-private"
+  sql_instance_name = "mysql-${random_id.db_name_suffix.hex}"
 }
 
 variable "project_id" {
