@@ -14,6 +14,7 @@ resource "google_sql_database_instance" "instance" {
 
     ip_configuration {
       private_network = module.vpc.network_self_link
+      ipv4_enabled    = false
     }
   }
 
