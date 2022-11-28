@@ -26,3 +26,9 @@ resource "google_sql_user" "datafusion" {
   name     = "datafusion"
   password = var.db_password
 }
+
+resource "google_sql_database" "emp" {
+  instance = google_sql_database_instance.instance.id
+  name     = "emp"
+  charset  = "utf8"
+}

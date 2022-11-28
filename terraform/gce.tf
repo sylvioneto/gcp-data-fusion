@@ -19,7 +19,12 @@ resource "google_compute_instance" "cloudsql_proxy" {
     subnetwork = "subnet-${var.region}"
   }
 
-  metadata_startup_script = "docker run -d -p 0.0.0.0:3306:3306 gcr.io/cloudsql-docker/gce-proxy:latest /cloud_sql_proxy -instances=${google_sql_database_instance.instance.connection_name}=tcp:0.0.0.0:3306"
+  metadata_startup_script = <<EOF
+  curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
+  sudo bash add-google-cloud-ops-agent-repo.sh --also-install
+
+  docker run -d -p 0.0.0.0:3306:3306 gcr.io/cloudsql-docker/gce-proxy:latest /cloud_sql_proxy -instances=${google_sql_database_instance.instance.connection_name}=tcp:0.0.0.0:3306
+  EOF
 
   service_account {
     email  = google_service_account.proxy_sa.email
@@ -46,9 +51,18 @@ resource "google_compute_instance" "mysql_client" {
   }
 
   metadata_startup_script = <<EOF
+  curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
+  sudo bash add-google-cloud-ops-agent-repo.sh --also-install
+
   sudo apt update
   sudo apt upgrade -y
   sudo apt install mysql-client -y
+
+  git clone https://github.com/datacharmer/test_db.git
+  cd test_db
+
+  MYSQL_IP=$(gcloud sql instances describe ${local.sql_instance_name} --format='get(ipAddresses.ipAddress)' --project=${var.project_id})
+  mysql -h$MYSQL_IP -udatafusion -p${var.db_password} -Demp < employees.sql
   EOF
 
   service_account {

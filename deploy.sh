@@ -20,9 +20,8 @@ fi
 echo "Enabling required APIs..."
 gcloud services enable compute.googleapis.com \
     container.googleapis.com \
-    datafusion.googleapis.com \
-    dataproc.googleapis.com \
-    dns.googleapis.com \
+    datafusion.googleapis.com\
+    dataproc.googleapis.com\
     bigquery.googleapis.com \
     storage.googleapis.com \
     sqladmin.googleapis.com
