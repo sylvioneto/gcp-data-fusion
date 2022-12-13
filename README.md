@@ -22,7 +22,7 @@ bash deploy.bash
 ## Destroy
 Execute Terraform using Cloud Build
 ```
-gcloud builds submit . --config cloudbuild_destroy.yaml
+bash destroy.bash
 ```
 
 ## Useful links
