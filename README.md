@@ -14,11 +14,9 @@ Resources created
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Make sure you are in the project you want to deploy the solution to.
-
-3. Run the `deploy.sh` script
+2. Run the `deploy.bash` script
 ```
-sh deploy.sh
+bash deploy.bash
 ```
 
 ## Destroy
