@@ -9,18 +9,14 @@ Resources created
 
 ## Deploy
 
-1. Create a new project and select it
-2. Open Cloud Shell and ensure the env var below is set, otherwise set it with `gcloud config set project` command
-```
-echo $GOOGLE_CLOUD_PROJECT
-```
+1. Click on Open in Google Cloud Shell button below.
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fsylvioneto%2Fthree-tier-application" target="_new">
+    <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
+</a>
 
-3. Clone this repo
-```
-git clone https://github.com/sylvioneto/gcp-data-fusion.git; cd gcp-data-fusion
-```
+2. Make sure you are in the project you want to deploy the solution to.
 
-4. Run the `deploy.sh` script
+3. Run the `deploy.sh` script
 ```
 sh deploy.sh
 ```
