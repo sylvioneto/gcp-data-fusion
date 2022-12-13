@@ -21,7 +21,8 @@ else
 fi
 
 echo Enabling required APIs...
-gcloud services enable compute.googleapis.com \
+gcloud services enable cloudbuild.googleapis.com \
+    compute.googleapis.com \
     container.googleapis.com \
     datafusion.googleapis.com\
     dataproc.googleapis.com\
