@@ -10,7 +10,7 @@ Resources created
 ## Deploy
 
 1. Click on Open in Google Cloud Shell button below.
-<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fsylvioneto%2Fgcp-data-fusion" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fsylvioneto%2Fgcp-data-fusion" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
