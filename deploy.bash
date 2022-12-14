@@ -32,6 +32,9 @@ gcloud services enable cloudbuild.googleapis.com \
     sqladmin.googleapis.com \
     storage.googleapis.com
 
+echo Waiting for APIs activation...
+sleep 60
+
 echo "Granting IAM roles to Cloud Build's Service Account..."
 PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format='value(projectNumber)')
 gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com --role=roles/editor
