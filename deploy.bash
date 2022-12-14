@@ -22,13 +22,15 @@ fi
 
 echo Enabling required APIs...
 gcloud services enable cloudbuild.googleapis.com \
+    bigquery.googleapis.com \
+    cloudresourcemanager.googleapis.com \
     compute.googleapis.com \
     container.googleapis.com \
     datafusion.googleapis.com\
     dataproc.googleapis.com\
-    bigquery.googleapis.com \
-    storage.googleapis.com \
-    sqladmin.googleapis.com
+    servicenetworking.googleapis.com \ 
+    sqladmin.googleapis.com \
+    storage.googleapis.com
 
 echo "Granting IAM roles to Cloud Build's Service Account..."
 PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format='value(projectNumber)')
